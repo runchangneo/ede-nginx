@@ -1,0 +1,11 @@
+.env
+logs/
+www/
+etc/conf.d/*.conf
+!etc/conf.d/localhost.conf
+!etc/conf.d/localhost.ssl.conf
+etc/ssl/*
+!etc/ssl/localhost
+!etc/ssl/CA.crt
+!etc/ssl/CA.key
+!etc/ssl/CA.srl

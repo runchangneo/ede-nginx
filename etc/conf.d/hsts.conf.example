@@ -1,0 +1,30 @@
+server {
+    listen 80;
+    listen [::]:80;
+    server_name localhost;
+
+    return 307 https://localhost$request_uri; 
+}
+
+server {
+    listen 443 ssl;
+    listen [::]:443;
+    server_name localhost;
+    root /usr/share/nginx/html;
+    index index.html;
+
+    access_log /dev/null;
+    error_log /var/log/nginx/localhost.error.log warn;
+
+    # HSTS，有效期为31536000秒
+    add_header Strict-Transport-Security "max-age=31536000";	
+
+    ssl_certificate /ssl/localhost/ssl.crt;
+    ssl_certificate_key /ssl/localhost/ssl.key;
+
+    # redirect server error pages to the static page /50x.html
+    error_page 500 502 503 504 /50x.html;
+    location = /50x.html {
+        root /usr/share/nginx/html;
+    }
+}
